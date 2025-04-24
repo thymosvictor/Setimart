@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SeekFilms</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Le+Jour+Serif&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">
+      <span class="amarelo">SÉTIM</span><span class="branco">ARTE</span>
+    </div>
+    <div class="menu-icon">
+      <a href="/menu">
+        <i class="fas fa-bars"></i>
+      </a>
+    </div>
+  </nav>  
+
+  <header class="header">
+    <h1><br>Saiba mais sobre<br> as suas obras cinematográficas<br> favoritas</h1>
+  </header>
+
+  <div class="busca-container">
+    <h1>Pesquise um filme</h1>
+    <div class="input-wrapper">
+      <input id="search" type="text" class="input-field" placeholder="Buscar filme">
+      <button id="btn-buscar" class="buscar-btn">
+        <i class="fas fa-search"></i>
+      </button>
+      <button id="fechar-resultados" class="fechar-btn" style="display: none;">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+  </div>
+
+  <div id="resultados"></div>
+
+  <div class="carousel-wrapper">
+    <div class="carousel" id="filterCarousel">
+      <button class="filter">Lançamentos 2025</button>
+      <button class="filter">Oscar's 2025</button>
+      <button class="filter">Independentes</button>
+    </div>
+  
+    <div class="arrows">
+      <button class="arrow" onclick="scrollCarousel(-1)">←</button>
+      <button class="arrow" onclick="scrollCarousel(1)">→</button>
+    </div>
+  </div>
+
+  <div id="carrossel-filmes" class="card-scroll-container">
+    <h2>Filmes em destaque</h2>
+    <div class="card">
+      <img src="/Seekfilms-main/img/AEA.jpg" alt="Capa do filme" />
+      <h3>Ainda Estou Aqui</h3>
+      <div class="rating">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="far fa-star"></i>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="/Seekfilms-main/img/Acromato.jpeg" alt="Capa do filme" />
+      <h3>Acrômato</h3>
+      <div class="rating">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+      </div>
+    </div>
+  </div>
+
+  <footer style="margin-top: 40px; text-align: center; padding: 15px; background-color: #111; color: #fff;">
+    <a href="mailto:thymosvictor@gmail.com" style="text-decoration: none; color: inherit;">
+      <i class="fas fa-envelope" style="font-size: 24px; margin-bottom: 8px;"></i>
+      <h1 style="font-size: 16px; margin: 0;">thymosvictor@gmail.com</h1>
+    </a>
+  </footer>
+
+  <script>
+    const input = document.getElementById("search");
+    const btnBuscar = document.getElementById("btn-buscar");
+    const btnFechar = document.getElementById("fechar-resultados");
+    const resultados = document.getElementById("resultados");
+    const carrossel = document.getElementById("carrossel-filmes");
+
+    btnBuscar.addEventListener("click", async () => {
+      const query = input.value.trim();
+
+      if (query.length >= 3) {
+        try {
+          const response = await fetch(`http://localhost:3000/films?nome=${encodeURIComponent(query)}`);
+          const films = await response.json();
+
+          mostrarResultados(films);
+          btnFechar.style.display = "inline";
+          carrossel.style.display = "none";
+        } catch (error) {
+          console.error("Erro ao buscar filme:", error);
+        }
+      }
+    });
+
+    btnFechar.addEventListener("click", () => {
+      resultados.innerHTML = "";
+      btnFechar.style.display = "none";
+      input.value = "";
+      carrossel.style.display = "flex";
+    });
+
+    function mostrarResultados(films) {
+      resultados.innerHTML = "";
+
+      if (films.length === 0) {
+        resultados.innerHTML = "<p>Nenhum filme encontrado.</p>";
+        return;
+      }
+
+      films.forEach(filme => {
+        const div = document.createElement("div");
+        div.classList.add("filme-card");
+        div.innerHTML = `
+          <img src="${filme.imageUrl}" alt="${filme.nome}" class="filme-img"/>
+          <div class="filme-info">
+            <h3>${filme.nome}</h3>
+            <h2>Diretor: ${filme.diretor}</h2>
+            <p>${filme.sinopse}</p>
+            <p>Roteiristas: ${filme.roteiristas}</p>
+          </div>
+        `;
+        resultados.appendChild(div);
+      });
+    }
+
+    function scrollCarousel(direction) {
+      const carousel = document.getElementById("filterCarousel");
+      const scrollAmount = 150;
+
+      carousel.scrollBy({
+        left: direction * scrollAmount,
+        behavior: "smooth"
+      });
+    }
+
+  </script>
+
+  <script type="module" src="./Back-end/index.js"></script>
+</body>
+</html>
