@@ -1,0 +1,16 @@
+[
+  {
+      "id":"1",
+      "nome":"Ainda Estou Aqui",
+      "diretor":"Walter Salles",
+      "imageUrl":"/img/AEA.jpg",
+      "sinopse":"No início da década de 1970, o Brasil enfrenta o endurecimento da ditadura militar. No Rio de Janeiro, a família Paiva - Rubens, Eunice e seus cinco filhos - vive à beira da praia em uma casa de portas abertas para os amigos. Um dia, Rubens Paiva é levado por militares à paisana e desaparece. Eunice - cuja busca pela verdade sobre o destino de seu marido se estenderia por décadas - é obrigada a se reinventar e traçar um novo futuro para si e seus filhos."
+  },
+  {
+      "id":"2",
+      "nome":"Acromato",
+      "diretor":"Thymos Victor",
+      "imageUrl":"/img/Acromato.jpeg",
+      "sinopse":"Alice é fadada a viver manhãs cinzas e de pura monotonia, em um silêncio doloroso e fúnebre que se repete incessantemente no ambiente universitário.Isso muda drasticamente quando ela é retirada de sua bolha silente após Øystein, de uma maneira nem um pouco convencional, apresentá-la à arte de ouvir. Mostrando-a uma visão colorida e funcional de lidar com os dias simples, utilizando a música como sua aliada."
+  }
+]
