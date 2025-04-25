@@ -6,6 +6,8 @@
   <title>SeekFilms</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="icon" href="./img/header.jpg">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#1c1c1c">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Le+Jour+Serif&display=swap" rel="stylesheet">
 </head>
@@ -151,6 +153,11 @@
         behavior: "smooth"
       });
     }
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js')
+      .then(reg => console.log('Service Worker registrado com sucesso:', reg))
+      .catch(err => console.log('Erro ao registrar o Service Worker:', err));
+  }
 
   </script>
 

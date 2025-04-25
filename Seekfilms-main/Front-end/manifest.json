@@ -1,1 +1,15 @@
-{}
+{
+    "name": "Seekfilms",
+    "short_name": "Seekfilms",
+    "start_url": "index.html",
+    "display": "standalone",
+    "background_color": "#000000",
+    "theme_color": "#1c1c1c",
+    "icons": [
+      {
+        "src": "img/header.jpg",
+        "sizes": "512x512",
+        "type": "image/jpeg"
+      }
+    ]
+}
